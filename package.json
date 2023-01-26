@@ -23,6 +23,7 @@
     "cypress-image-diff-js": "^1.23.0"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "faker": "^5.5.3",
     "faker-br": "^0.4.1"
   }

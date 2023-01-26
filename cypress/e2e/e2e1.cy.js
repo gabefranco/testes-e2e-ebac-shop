@@ -4,9 +4,7 @@ import EnderecoPage from '../support/page_objects/endereco.page'
 
 const endEntrega = require('../fixtures/endEntrega.json')
 
-const faker = require('faker-br')
-
-
+//import { faker } from '@faker-js/faker';
 
 describe('Teste de E2E - Login, Compras, Carrinho, Alteração Cadastro e Finalização', () => {
 
@@ -18,28 +16,16 @@ describe('Teste de E2E - Login, Compras, Carrinho, Alteração Cadastro e Finali
         cy.get('#password').type('teste@teste.com')
         cy.get('.woocommerce-form > .button').click()
         cy.get('.page-title').should('contain', 'Minha conta')
-       cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, aluno_ebac')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, aluno_ebac')
     })
 
 
 
     //01 - Alterando dados de Faturamento
-   /* it('Alteração de dados Faturamento - usando PAGE OBJECTS', () => {
-        var nomeFaker = faker.name.firstName()
-        var sobrenomeFaker = faker.name.lastName()
-        var empresaFaker = faker.company.companyName()
-        var paisFaker = faker.address.country()
-        var enderecoFaker = faker.address.streetAddress()
-        var complementoFaker = faker.address.secondaryAddress()
-        var cidadeFaker = faker.address.city()
-        var estadoFaker = faker.address.state()
-        var cepFaker = faker.address.zipCode()
-        var telefoneFaker = faker.phone.phoneNumber()
-        var emailFaker = faker.internet.email()
-
+    it('Alteração de dados Faturamento - usando PAGE OBJECTS', () => {
         EnderecoPage.alterarEnderecoFaturamento(nomeFaker, sobrenomeFaker, empresaFaker, paisFaker, enderecoFaker, complementoFaker, cidadeFaker, estadoFaker, cepFaker, telefoneFaker, emailFaker),
-        cy.get('.woocommerce-message').should('contain', "Endereço alterado com sucesso.")
-    })*/
+            cy.get('.woocommerce-message').should('contain', "Endereço alterado com sucesso.")
+    })
 
     it('Alteração de dados Entrega - usando arquivo de dados FIXTURE', () => {
         EnderecoPage.alterarEnderecoEntrega(
