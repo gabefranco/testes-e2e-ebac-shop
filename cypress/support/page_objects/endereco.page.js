@@ -1,6 +1,22 @@
+
+import { faker } from '@faker-js/faker';
+
 class EnderecoPage {
 
     alterarEnderecoFaturamento(nomeFaker, sobrenomeFaker, empresaFaker, paisFaker, enderecoFaker, complementoFaker, cidadeFaker, estadoFaker, cepFaker, telefoneFaker, emailFaker) {
+      
+        var nomeFaker = faker.name.firstName()
+        var sobrenomeFaker = faker.name.lastName()
+        var empresaFaker = faker.company.companyName()
+        var paisFaker = faker.address.country()
+        var enderecoFaker = faker.address.streetAddress()
+        var complementoFaker = faker.address.secondaryAddress()
+        var cidadeFaker = faker.address.city()
+        var estadoFaker = faker.address.state()
+        var cepFaker = faker.address.zipCode()
+        var telefoneFaker = faker.phone.phoneNumber()
+        var emailFaker = faker.internet.email()
+      
         cy.get('.woocommerce-MyAccount-navigation-link--edit-address > a').click()
         cy.get(':nth-child(1) > .title > .edit').click()
         cy.get('#billing_first_name').clear().type(nomeFaker)
@@ -20,6 +36,7 @@ class EnderecoPage {
 
 
     alterarEnderecoEntrega(nome, sobrenome, empresa, pais, endereco, numero, cidade, estado, cep) {
+        cy.get('.woocommerce-MyAccount-navigation-link--edit-address > a').click()
         cy.get(':nth-child(2) > .title > .edit').click()
         cy.get('#shipping_first_name').clear().type(nome)
         cy.get('#shipping_last_name').clear().type(sobrenome)
