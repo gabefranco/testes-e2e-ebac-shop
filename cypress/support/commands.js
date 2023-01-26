@@ -1,33 +1,61 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-
-Cypress.Commands.add('login', (usuario, senha) => {
+//Login
+/*Cypress.Commands.add('login', (usuario, senha) => {
     cy.get('#username').type(usuario)
-    cy.get('#password').type(senha, {log: false})
+    cy.get('#password').type(senha, { log: false })
     cy.get('.woocommerce-form > .button').click()
-});
+});*/
 
+//Produto com variações
+Cypress.Commands.add('addProdutoVariavel', (busca, produto, tamanho, quantidade) => {
+    cy.visit('produtos')
+    cy.get('#primary-menu > .menu-item-629 > a').click()
+    cy.get('.search').type(busca)
+    cy.get('.search > .tbay-search-form > .form-ajax-search > .form-group > .input-group > .button-group').click()
+    cy.get('.product-block')
+        .contains(produto).click()
+    cy.get('.button-variable-item-' + tamanho).click()
+    cy.get(':nth-child(2) > .value > .variable-items-wrapper > .variable-item').click()
+    cy.get('.input-text').clear().type(quantidade)
+    cy.get('.single_add_to_cart_button').click()
+    cy.get('.woocommerce-message').contains('foram adicionados no seu carrinho').should('be.visible')
+})
+
+//Produto simples
+Cypress.Commands.add('addProdutoSimples', (busca, produto) => {
+    cy.visit('produtos')
+    cy.get('#primary-menu > .menu-item-629 > a').click()
+    cy.get('.search').type(busca)
+    cy.get('.search > .tbay-search-form > .form-ajax-search > .form-group > .input-group > .button-group').click()
+    cy.get('.product-block')
+        .contains(produto).click()
+    cy.get('.single_add_to_cart_button').click()
+    cy.get('.woocommerce-message').contains('foi adicionado no seu carrinho').should('be.visible')
+})
+
+//Produto simples, escolhe o primeiro da lista
+Cypress.Commands.add('addProdutoSimplesPrimeiro', (busca) => {
+    cy.visit('produtos')
+    cy.get('#primary-menu > .menu-item-629 > a').click()
+    cy.get('.search').type(busca)
+    cy.get('.search > .tbay-search-form > .form-ajax-search > .form-group > .input-group > .button-group').click()
+    cy.get('.product-block')
+        .first().click()
+    cy.get('.single_add_to_cart_button').click()
+    cy.get('.woocommerce-message').contains('foi adicionado no seu carrinho').should('be.visible')
+})
+
+//Produto com variação, escolhe o segundo da lista.
+Cypress.Commands.add('addProdutoVariavelSegundo', (busca, tamanho, cor, quantidade) => {
+    cy.visit('produtos')
+    cy.get('#primary-menu > .menu-item-629 > a').click()
+    cy.get('.search').type(busca)
+    cy.get('.search > .tbay-search-form > .form-ajax-search > .form-group > .input-group > .button-group').click()
+    cy.get('.product-block')
+        .eq(1).click()
+    cy.get('.button-variable-item-' + tamanho).click()
+    cy.get('.button-variable-item-' + cor).click()
+    cy.get('.input-text').clear().type(quantidade)
+    cy.get('.single_add_to_cart_button').click()
+    cy.get('.woocommerce-message').contains('foram adicionados no seu carrinho').should('be.visible')
+})
