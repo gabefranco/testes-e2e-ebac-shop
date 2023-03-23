@@ -3,11 +3,11 @@
     "nome":"Glauber",
     "sobrenome":"Franco",
     "empresa":"EBAC",
+    "pais":"Brasil",
     "endereco":"Av. Paulista",
     "numero":"20001",
     "cidade":"São Paulo",
-    "estado":"SP",
-    "pais":"Brasil",
+    "estado":"São Paulo",
     "cep":"11123-000"
 }
 ]
